@@ -1,0 +1,16 @@
+[13-Jan-2023 09:31:26 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home/vps2mitademo/public_html/bms/vendor/composer/../nunomaduro/collision/src/Adapters/Laravel/IgnitionSolutionsRepository.php): failed to open stream: No such file or directory in /home/vps2mitademo/public_html/bms/vendor/composer/ClassLoader.php:571
+Stack trace:
+#0 /home/vps2mitademo/public_html/bms/vendor/composer/ClassLoader.php(571): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home/v...', '/home/vps2mitad...', 571, Array)
+#1 /home/vps2mitademo/public_html/bms/vendor/composer/ClassLoader.php(571): include()
+#2 /home/vps2mitademo/public_html/bms/vendor/composer/ClassLoader.php(428): Composer\Autoload\includeFile('/home/vps2mitad...')
+#3 [internal function]: Composer\Autoload\ClassLoader->loadClass('NunoMaduro\\Coll...')
+#4 /home/vps2mitademo/public_html/bms/vendor/nunomaduro/collision/src/Adapters/Laravel/CollisionServiceProvider.php(50): spl_autoload_call('NunoMaduro\\Coll...')
+#5 /home/vps2mitademo/public_html/bms/vendor/laravel/framework/s in /home/vps2mitademo/public_html/bms/vendor/composer/ClassLoader.php on line 571
+[13-Jan-2023 09:31:26 UTC] PHP Fatal error:  Uncaught ErrorException: include(/home/vps2mitademo/public_html/bms/vendor/composer/../symfony/error-handler/Error/FatalError.php): failed to open stream: No such file or directory in /home/vps2mitademo/public_html/bms/vendor/composer/ClassLoader.php:571
+Stack trace:
+#0 /home/vps2mitademo/public_html/bms/vendor/composer/ClassLoader.php(571): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'include(/home/v...', '/home/vps2mitad...', 571, Array)
+#1 /home/vps2mitademo/public_html/bms/vendor/composer/ClassLoader.php(571): include()
+#2 /home/vps2mitademo/public_html/bms/vendor/composer/ClassLoader.php(428): Composer\Autoload\includeFile('/home/vps2mitad...')
+#3 [internal function]: Composer\Autoload\ClassLoader->loadClass('Symfony\\Compone...')
+#4 /home/vps2mitademo/public_html/bms/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(220): spl_autoload_call('Symfony\\Compone...')
+#5 /home/vps2mitademo/public_html/bms/vendor/laravel/framework/src/Illuminate/Foundation/B in /home/vps2mitademo/public_html/bms/vendor/composer/ClassLoader.php on line 571
