@@ -140,7 +140,12 @@ $('#regionsaves').click(function (e) {
 
             },{data: 'gender',name: 'gender'
 
-            },
+            },{
+                "data": "image",
+                "render": function (data) {
+                    return '<img src="' + data + '" class="avatar" width="200" height="200"/>';
+                    }
+              },
             ]
     });
 
