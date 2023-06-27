@@ -31,7 +31,7 @@ class ResidentUserAccountController extends Controller
     
     public function client_login(){
         if (session()->has("resident")) {
-            return redirect("/barangay/home")->with('alert', 'Updated!');
+            return redirect("/barangay/home")->with('error','Not Verified, Please Contact Admin!');
         }
         return view('pages.ClientSide.userlogin.login');
     }
@@ -78,14 +78,14 @@ class ResidentUserAccountController extends Controller
 
         $resident = resident_account::where("email","=", $request->client_login_email)->first();
 
-        if($resident->status == "user" ){
+        if($resident->is_verified == "0" ){
             session('user');
             session(['user.email' => $request->client_login_email]);
             session(['user.firstname' => $resident->first_name]);
             session(['user.username' => $resident->username]);
             session(['user.id' => $resident->resident_id]);
         }
-        elseif ($resident->status != "user" ){
+        elseif ($resident->status != "0" ){
         $layout = DB::table('barangayimages')
         ->where('barangay_id','=',1)
         ->first();
@@ -179,7 +179,7 @@ class ResidentUserAccountController extends Controller
         $new_resident->username = $request->register_username;
         $new_resident->email = $request->register_email;
         $new_resident->password = Hash::make($request->register_password);
-        $new_resident->status = "user";
+        // $new_resident->status = "user";
         $query = $new_resident->save();
 
         return redirect ("/barangay/login")->with('success_register', 'Account successfully registered!');

@@ -10,7 +10,7 @@ class HomeController extends Controller
     public function resident_home(){
 
         if (!session()->has("resident")) {
-            return redirect("/barangay/login");
+            return redirect("/barangay/login")->with('error','Not Verified, Please Contact Admin!');
         }
 
         return view('pages.ClientSide.userdashboard.homepage');

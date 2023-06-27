@@ -191,7 +191,7 @@ Route::get("/barangay/forgot_password
 
 
 //barangay Side End
-
+Route::put('/verify/{verify}', [Verify::class, 'update'])->name('verify.update');
 
 
 
