@@ -30,50 +30,85 @@
   <h1 class="border-bottom border-bot text-4xl font-bold pt-3">Ordinances</h1>
 </div>
     <br><br>
-    <a href="{{ route('adminpanel.ordinances.create') }}" class="btn btn-primary mb-3">Add New Ordinance</a>
-
+    <div class="d-flex justify-content-between mb-3">
+        <a href="{{ route('adminpanel.ordinances.create') }}" class="btn btn-primary">Add New Ordinance</a>
+        <a href="#" onclick="downloadTableData()" class="btn btn-success">Download as CSV</a>
+    </div>
     @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
     @endif
-
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($ordinances as $ordinance)
-            <tr>
-                <td>{{ $ordinance->title }}</td>
-                <td>{{ $ordinance->description }}</td>
-                <td>
-                    <form action="{{ route('adminpanel.ordinances.destroy', $ordinance) }}" method="POST"
-                        style="display: inline;">
+    <table id="ordinancesTable" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @forelse($ordinances as $ordinance)
+        <tr>
+            <td>{{ $ordinance->title }}</td>
+            <td>
+                <div class="d-flex">
+                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal{{ $ordinance->id }}">
+                        View Full Story
+                    </button>
+                    <a href="{{ route('adminpanel.ordinances.edit', $ordinance) }}" class="btn btn-link">Edit</a>
+                    <form action="{{ route('adminpanel.ordinances.destroy', $ordinance) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete?')">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-sm"
-                            onclick="return confirm('Are you sure you want to delete?')">Delete</button>
+                        <button type="submit" class="btn btn-link">Delete</button>
                     </form>
+                </div>
 
-                    <form action="{{ route('adminpanel.ordinances.edit', $ordinance) }}" method="GET"
-                        style="display: inline;">
-                        @csrf
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-sm">Edit</button>
-                    </form>
-                </td>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal{{ $ordinance->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">{{ $ordinance->title }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>{{ $ordinance->description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        @empty
+        <tr>
+            <td colspan="2">No ordinances found</td>
+        </tr>
+        @endforelse
+    </tbody>
+</table>
 
-            </tr>
-            @empty
-            <tr>
-                <td colspan="3">No ordinances found</td>
-            </tr>
-            @endforelse
-        </tbody>
-    </table>
 </div>
 @endsection
+<script>
+    function downloadTableData() {
+        let tableData = [];
+        const table = document.getElementById('ordinancesTable');
+        const rows = table.rows;
+        for (let i = 1; i < rows.length; i++) {
+            const rowData = [];
+            for (let j = 0; j < rows[i].cells.length; j++) {
+                rowData.push(rows[i].cells[j].textContent.trim());
+            }
+            tableData.push(rowData.join(','));
+        }
+        const csvContent = 'data:text/csv;charset=utf-8,' + tableData.join('\n');
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement('a');
+        link.setAttribute('href', encodedUri);
+        link.setAttribute('download', 'ordinances.csv');
+        document.body.appendChild(link);
+        link.click();
+    }
+</script>

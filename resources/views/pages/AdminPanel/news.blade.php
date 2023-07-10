@@ -20,9 +20,7 @@
             font-family: 'Poppins', sans-serif;
         }
     </style>
-</head>
-
-@extends('layouts.apps')
+</head>@extends('layouts.apps')
 
 @section('content')
     <div class="container">
@@ -30,8 +28,10 @@
             <h1 class="border-bottom border-bot text-4xl font-bold pt-3">News</h1>
         </div>
         <br><br>
-        <a href="{{ route('adminpanel.news.create') }}" class="btn btn-primary mb-3">Add New News or Announcement</a>
-
+        <div class="d-flex justify-content-between mb-3">
+            <a href="{{ route('adminpanel.news.create') }}" class="btn btn-primary mb-3">Add New News or Announcement</a>
+            <a href="#" onclick="downloadTableData()" class="btn btn-success">Download as CSV</a>
+        </div>
         @if(session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -50,25 +50,29 @@
                 @forelse($news as $item)
                     <tr>
                         <td>{{ $item->title }}</td>
-                        <td>{{ $item->description }}</td>
+                        <td>{{ Str::limit($item->description, 100) }}</td>
                         <td>
-                            <form action="{{ route('adminpanel.news.destroy', $item) }}" method="POST"
-                                style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-sm"
-                                    onclick="return confirm('Are you sure you want to delete?')">Delete</button>
-                            </form>
+                            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
+                                View Full Story
+                            </button>
 
-                            <form action="{{ route('adminpanel.news.edit', $item) }}" method="GET"
-                                style="display: inline;">
-                                @csrf
-                                <button type="submit"
-                                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-sm">Edit</button>
-                            </form>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">{{ $item->title }}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>{{ $item->description }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
-
                     </tr>
                 @empty
                     <tr>

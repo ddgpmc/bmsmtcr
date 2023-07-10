@@ -1,4 +1,4 @@
-
+  
 <header class="header-blue" style="padding-bottom: 0px;">
     <nav class="bg-gray-900 text-white shadow-md">
         <div class="container flex items-center justify-between px-4 py-2 mx-auto">
@@ -48,8 +48,9 @@
                 </div>
             </li>
             <li class="nav-item"><a class="nav-link {{ (request()->is('barangay/news*')) ? 'active' : '' }}" href="/barangay/news">News</a></li>
-            <li class="nav-item"><a class="nav-link {{ (request()->is('barangay/info*')) ? 'active' : '' }}" href="/barangay/info">Info</a></li>
             <li class="nav-item"><a class="nav-link {{ (request()->is('barangay/ordinances*')) ? 'active' : '' }}" href="/barangay/ordinances">Ordinances</a></li>
+            <li class="nav-item"><a class="nav-link {{ (request()->is('barangay/info*')) ? 'active' : '' }}" href="/barangay/info">Info</a></li>
+            
         </ul>
     </nav>
 </header>
