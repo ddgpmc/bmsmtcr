@@ -34,7 +34,7 @@ class OrdinancesController extends Controller
 
         $ordinance = new Ordinance;
         $ordinance->title = $validatedData['title'];
-        $ordinance->description = $validatedData['description'];
+        $ordinance->description = strip_tags($validatedData['description']); // Strip HTML tags before saving
         // Set any other fields of your ordinance model as per your requirements
         $ordinance->save();
 
@@ -60,12 +60,15 @@ class OrdinancesController extends Controller
     }
 
     public function residentOrdinances()
-{
-    $ordinances = Ordinance::all();
+    {
+        $ordinances = Ordinance::all();
 
-    return view('pages.ClientSide.userdashboard.ordinances', ['ordinances' => $ordinances]);
-}
+        return view('pages.ClientSide.userdashboard.ordinances', ['ordinances' => $ordinances]);
+    }
 
-
+    public function show(Ordinance $ordinance)
+        {
+            return view('pages.AdminPanel.ordinances.show', compact('ordinance'));
+        }
         
 }    

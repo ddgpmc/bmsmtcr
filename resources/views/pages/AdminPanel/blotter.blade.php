@@ -49,11 +49,6 @@
 
                         <form id="blotterform"  name="blotterform" class="modal-input">
                            {{ csrf_field() }}
-
-
-
-
-
                         <div id="schedule" class="tabcontent">
                            <div class="topnav navbar navbar">
                               <div>

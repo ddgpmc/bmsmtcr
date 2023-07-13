@@ -74,7 +74,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <p>{{ $ordinance->description }}</p>
+                            <p>{!! nl2br(e($ordinance->description)) !!}</p>
                             </div>
                         </div>
                     </div>

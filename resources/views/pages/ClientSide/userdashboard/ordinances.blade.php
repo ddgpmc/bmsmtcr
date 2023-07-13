@@ -39,31 +39,14 @@
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    @forelse($ordinances as $ordinance)
-    <div class="bg-white p-8 shadow-md rounded-lg">
-        <h4 class="text-2xl font-bold mb-0">{{ $ordinance->title }}</h4>
-        <p class="text-gray-500 text-sm mt-1">Added on {{ $ordinance->created_at->format('M d, Y H:i') }}</p>
-        <p class="text-gray-700 mt-4">{{ \Illuminate\Support\Str::limit($ordinance->description, 100) }}</p>
-        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal{{ $ordinance->id }}">
-            Read More
-        </button>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal{{ $ordinance->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{ $ordinance->title }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>{{ $ordinance->description }}</p>
-                </div>
-            </div>
+        @forelse($ordinances as $ordinance)
+        <div class="bg-white p-8 shadow-md rounded-lg">
+            <h4 class="text-2xl font-bold mb-0">{{ $ordinance->title }}</h4>
+            <p class="text-gray-500 text-sm mt-1">Added on {{ $ordinance->created_at->format('M d, Y H:i') }}</p>
+            <p class="text-gray-700">{!! \Illuminate\Support\Str::limit(strip_tags($ordinance->description), 100) !!}</p>
+            <a href="{{ route('ordinances.show', $ordinance) }}">Read More</a>
+            </a>
         </div>
-    </div>
     @empty
     <div class="bg-white p-8 shadow-lg rounded-lg">
         <p class="text-gray-700">No ordinances available.</p>
@@ -74,7 +57,40 @@
     </div>
 </div>
 <br><br>
-
+<footer class="footer-clean bg-gray-900" style="position: absolute;left: 0;bottom: 0;height: 174px;width: 100%;overflow: hidden;margin-top: 30px; color: #54c0e8 !important;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-4 col-md-3 item">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Web design</a></li>
+                        <li><a href="#">Development</a></li>
+                        <li><a href="#">Hosting</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 col-md-3 item">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">Company</a></li>
+                        <li><a href="#">Team</a></li>
+                        <li><a href="#">Legacy</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 col-md-3 item">
+                    <h3>Careers</h3>
+                    <ul>
+                        <li><a href="#">Job openings</a></li>
+                        <li><a href="#">Employee success</a></li>
+                        <li><a href="#">Benefits</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a>
+                    <p class="copyright">Maharlican Innovations and Technology Applications Corporation © 2022</p>
+                </div>
+            </div>
+        </div>
+        
+    </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
 <script>

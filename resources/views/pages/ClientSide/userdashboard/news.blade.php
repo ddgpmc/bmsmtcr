@@ -23,7 +23,7 @@
 
 <body style="margin: 0 0 169px;">
     
-    @include('inc.client_nav')
+@include('inc.client_nav')
 
     <div class="bg-gray-100 py-8">
     <div class="container mx-auto px-4">
@@ -40,34 +40,22 @@
             </div>
         </div>  
         <div class="container">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            @forelse($news as $item)
-                <div class="bg-white p-8 shadow-md rounded-lg">
-                    <h4 class="text-2xl font-bold mb-4">{{ $item->title }}</h4>
-                    <p class="text-gray-700">{{ \Illuminate\Support\Str::limit($item->description, 100) }}</p>
-                    <a href="#" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">Read More</a>
-                </div>
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">{{ $item->title }}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p>{{ $item->description }}</p>
-                            </div>
+            <div class="container">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    @forelse($news as $item)
+                        <div class="bg-white p-8 shadow-md rounded-lg">
+                            <h4 class="text-2xl font-bold mb-4">{{ $item->title }}</h4>
+                            <p class="text-gray-700">{{ \Illuminate\Support\Str::limit($item->description, 100) }}</p>
+                            <a href="{{ route('news.show', $item) }}">Read More</a>
                         </div>
-                    </div>
+                    @empty
+                        <div class="bg-white p-8 shadow-lg rounded-lg">
+                            <p class="text-gray-700">No news available.</p>
+                        </div>
+                    @endforelse
                 </div>
-            @empty
-                <div class="bg-white p-8 shadow-lg rounded-lg">
-                    <p class="text-gray-700">No news available.</p>
-                </div>
-            @endforelse
+            </div>
+        </div>
         </div>
     </div>
     </div>
@@ -109,6 +97,8 @@
         </div>
         
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

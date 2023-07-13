@@ -49,7 +49,7 @@ class NewsController extends Controller
         ]);
 
         $news->title = $validatedData['title'];
-        $news->description = $validatedData['description'];
+        $news->description =  strip_tags($validatedData['description']);
         // Update any other fields of your News model as per your requirements
         $news->save();
 
