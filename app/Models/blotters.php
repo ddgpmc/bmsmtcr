@@ -23,7 +23,9 @@ class blotters extends Model
         'schedule_date',
         // 'schedule_time',
         'schedule',
-        'incident_narrative'
+        'incident_narrative',
+        'residency'
+
     ];
     public $timestamps = true;
 }

@@ -53,6 +53,15 @@
                            <div class="topnav navbar navbar">
                               <div>
                                  <h4 style="color: white">Adding Complainants</h4>
+                                 <!-- <div class="mb-3">
+                                 <select class="form-control" name="residency" id="residency">
+                                    <option hidden>Choose Residency</option>
+                                
+                                    <option value="resident">Resident</option>
+                                    <option value="non-resident">Non-Resident</option>
+                                  
+                                 </select>
+                               </div> -->
                               </div>
                            </div>
 
@@ -90,7 +99,7 @@
                            </div>
 
                            <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border no-footer respondents-table">
-                              <thead>
+                              <thead>  
                                  <tr class="headings">
                                     <th class="column-title">Action</th>
                                     <th class="column-title">FullName</th>
@@ -230,10 +239,21 @@
 
                                  </div>
 
-                                 {{-- <div class="col-sm-6" >
+                                <div class="col-sm-6" >
+                                <label >Residency:</label>
+                                 <select class="form-control" name="residency" id="residency">
+                                    <option hidden>Choose Residency</option>
+                                
+                                    <option value="Resident">Resident</option>
+                                    <option value="Non-resident">Non-Resident</option>
+                                  
+                                 </select>
+                               </div>
+
+                                 <!-- <div class="col-sm-6" >
                                     <label >Time Schedule</label>
                                     <input type="time" id="schedule_time" name="schedule_time" required="required" class="form-control ">
-                                 </div> --}}
+                                 </div> -->
 
                               </div>
 
@@ -253,6 +273,7 @@
                                  </div>
                               </div>
 
+                              
 
                               <div class="item form-group" style="margin-top:1rem;>
                                  <label for="incident_narrative">Incident Narrative</label>
@@ -307,6 +328,7 @@
                         <th class="column-title">Incident Date</th>
                         <th class="column-title">Incident Time</th>
                         <th class="column-title">Schedule Date</th>
+                        <th class="column-title">Residency</th>
                         {{-- <th class="column-title">Schedule Time</th> --}}
                      </tr>
                   </thead>
@@ -319,6 +341,7 @@
                         <td id="viewdate_incident"></td>
                         <td id="viewtimeof_incident"></td>
                         <td id="viewschedule_date"></td>
+                        <td id="viewresidency"></td>
                         {{-- <td id="viewschedule_time"></td> --}}
                      </tr>
                   </tbody>
@@ -529,7 +552,8 @@
                      {  data: 'time_reported', name: 'time_reported'},
                      {   data: 'incident_type', name: 'incident_type'},
                      {     data: 'date_incident', name: 'date_incident'},
-                     { data: 'time_incident', name: 'time_incident'}
+                     { data: 'time_incident', name: 'time_incident'},
+                     // { data: 'residency', name: 'residency'}
                   ]
 
                });
@@ -559,6 +583,7 @@
 
 
                      $('#viewschedule_date').html(data[0].schedule_date);
+                     $('#viewresidency').html(data[0].residency);
                      // $('#viewschedule_time').html(data[0].schedule_time);
                      $('#viewincident_narrative').val(data[0].incident_narrative);
 
@@ -602,6 +627,7 @@
                      $('#date_reported').val(data[0].date_reported);
                      $('#time_reported').val(data[0].time_reported);
                      $('#schedule_date').val(data[0].schedule_date);
+                    
                      // $('#schedule_time').val(data.schedule_time);
                      $('input[name^="status"][value="'+data[0].status+'"').prop('checked',true);
                      $('#incident_narrative').val(data[0].incident_narrative);

@@ -55,6 +55,7 @@ class BlotterController extends Controller
                 "time_reported" => "required",
                 "status" => "required",
                 "incident_narrative" => "required",
+                // "residency"=> "required",
                 "Complainant" => "required",
                 "Respondent" => "required",
                 "Victim" => "required",
@@ -62,7 +63,8 @@ class BlotterController extends Controller
             ]
 
         );
-
+       
+      
         if ($validator->fails()) {
             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
@@ -96,7 +98,8 @@ class BlotterController extends Controller
                     'schedule_date' => $request->schedule_date,
                     // 'schedule_time' => $request->schedule_time,
                     'schedule' => $request->schedule,
-                    'incident_narrative' => $request->incident_narrative
+                    'incident_narrative' => $request->incident_narrative,
+                    'residency' => $request->residency
                 ]
             );
 
@@ -111,7 +114,8 @@ class BlotterController extends Controller
                 $data->involvement_type = $request->involvement_type[$key];
                 $data->save();
             }
-
+            // $resi =  $request->residency;
+            dd( $request->ids);
 
 
             return response()->json(['success' => 'NewBlotter saved successfully.']);
