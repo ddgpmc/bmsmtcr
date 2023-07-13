@@ -23,26 +23,43 @@
 
 <body style="margin: 0 0 169px;">
     
-    @include('inc.client_nav')
+@include('inc.client_nav')
 
     <div class="bg-gray-100 py-8">
     <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            @forelse($news as $item)
-            <div class="bg-white p-8">
-                <h4 class="text-2xl font-bold mb-4">{{ $item->title }}</h4>
-                <p class="">{{ $item->description }}</p>
+    <div class="mb-3">
+            <div class="dropdown">
+                <button class="btn bg-blue-400 dropdown-toggle" type="button" id="sortDropdown" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Sort by
+                </button>
+                <div class="dropdown-menu" aria-labelledby="sortDropdown">
+                    <a class="dropdown-item" href="#" id="sortTime">Sort by Time</a>
+                    <a class="dropdown-item" href="#" id="sortTitle">Sort by Title</a>
+                </div>
             </div>
-            @empty
-            <div class="bg-white p-8">
-                <p>No news available.</p>
+        </div>  
+        <div class="container">
+            <div class="container">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    @forelse($news as $item)
+                        <div class="bg-white p-8 shadow-md rounded-lg">
+                            <h4 class="text-2xl font-bold mb-4">{{ $item->title }}</h4>
+                            <p class="text-gray-700">{{ \Illuminate\Support\Str::limit($item->description, 100) }}</p>
+                            <a href="{{ route('news.show', $item) }}">Read More</a>
+                        </div>
+                    @empty
+                        <div class="bg-white p-8 shadow-lg rounded-lg">
+                            <p class="text-gray-700">No news available.</p>
+                        </div>
+                    @endforelse
+                </div>
             </div>
-            @endforelse
+        </div>
         </div>
     </div>
+    </div>
 </div>
-
-
 
     </div>
     <br><br>
@@ -81,7 +98,54 @@
         
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('sortTime').addEventListener('click', function() {
+        sortOrdinances('time');
+    });
+
+    document.getElementById('sortTitle').addEventListener('click', function() {
+        sortOrdinances('title');
+    });
+
+    function sortOrdinances(sortBy) {
+        var ordinancesContainer = document.querySelector('.grid');
+        var ordinances = Array.from(ordinancesContainer.children);
+
+        ordinances.sort(function(a, b) {
+            var valueA, valueB;
+
+            if (sortBy === 'time') {
+                valueA = a.querySelector('.text-gray-500').textContent;
+                valueB = b.querySelector('.text-gray-500').textContent;
+            } else if (sortBy === 'title') {
+                valueA = a.querySelector('.text-2xl').textContent;
+                valueB = b.querySelector('.text-2xl').textContent;
+            }
+
+            if (valueA < valueB) {
+                return -1;
+            } else if (valueA > valueB) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+
+        while (ordinancesContainer.firstChild) {
+            ordinancesContainer.firstChild.remove();
+        }
+
+        ordinances.forEach(function(ordinance) {
+            ordinancesContainer.appendChild(ordinance);
+        });
+    }
+</script>
+
 </body>
 
 </html>

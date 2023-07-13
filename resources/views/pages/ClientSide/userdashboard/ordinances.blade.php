@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>News</title>
+    <title>Ordinances</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -22,29 +22,42 @@
 </head>
 
 <body style="margin: 0 0 169px;">
-    
+
 @include('inc.client_nav')
-    <div class="bg-gray-100 py-8">
+<div class="bg-gray-100 py-8">
     <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            @forelse($ordinances as $ordinance)
-            <div class="bg-white p-8">
-                <h4 class="text-2xl font-bold mb-4">{{ $ordinance->title }}</h4>
-                <p class="">{{ $ordinance->description }}</p>
+        <div class="mb-3">
+            <div class="dropdown">
+                <button class="btn bg-blue-400 dropdown-toggle" type="button" id="sortDropdown" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Sort by
+                </button>
+                <div class="dropdown-menu" aria-labelledby="sortDropdown">
+                    <a class="dropdown-item" href="#" id="sortTime">Sort by Time</a>
+                    <a class="dropdown-item" href="#" id="sortTitle">Sort by Title</a>
+                </div>
             </div>
-            @empty
-            <div class="bg-white p-8">
-                <p>No ordinances available.</p>
-            </div>
-            @endforelse
         </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        @forelse($ordinances as $ordinance)
+        <div class="bg-white p-8 shadow-md rounded-lg">
+            <h4 class="text-2xl font-bold mb-0">{{ $ordinance->title }}</h4>
+            <p class="text-gray-500 text-sm mt-1">Added on {{ $ordinance->created_at->format('M d, Y H:i') }}</p>
+            <p class="text-gray-700">{!! \Illuminate\Support\Str::limit(strip_tags($ordinance->description), 100) !!}</p>
+            <a href="{{ route('ordinances.show', $ordinance) }}">Read More</a>
+            </a>
+        </div>
+    @empty
+    <div class="bg-white p-8 shadow-lg rounded-lg">
+        <p class="text-gray-700">No ordinances available.</p>
     </div>
+    @endforelse
 </div>
 
-
-
-    </div><br><br>
-    <footer class="footer-clean bg-gray-900" style="position: absolute;left: 0;bottom: 0;height: 174px;width: 100%;overflow: hidden;margin-top: 30px; color: #54c0e8 !important;">
+    </div>
+</div>
+<br><br>
+<footer class="footer-clean bg-gray-900" style="position: absolute;left: 0;bottom: 0;height: 174px;width: 100%;overflow: hidden;margin-top: 30px; color: #54c0e8 !important;">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-sm-4 col-md-3 item">
@@ -78,8 +91,51 @@
         </div>
         
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
-</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('sortTime').addEventListener('click', function() {
+        sortOrdinances('time');
+    });
 
+    document.getElementById('sortTitle').addEventListener('click', function() {
+        sortOrdinances('title');
+    });
+
+    function sortOrdinances(sortBy) {
+        var ordinancesContainer = document.querySelector('.grid');
+        var ordinances = Array.from(ordinancesContainer.children);
+
+        ordinances.sort(function(a, b) {
+            var valueA, valueB;
+
+            if (sortBy === 'time') {
+                valueA = a.querySelector('.text-gray-500').textContent;
+                valueB = b.querySelector('.text-gray-500').textContent;
+            } else if (sortBy === 'title') {
+                valueA = a.querySelector('.text-2xl').textContent;
+                valueB = b.querySelector('.text-2xl').textContent;
+            }
+
+            if (valueA < valueB) {
+                return -1;
+            } else if (valueA > valueB) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+
+        while (ordinancesContainer.firstChild) {
+            ordinancesContainer.firstChild.remove();
+        }
+
+        ordinances.forEach(function(ordinance) {
+            ordinancesContainer.appendChild(ordinance);
+        });
+    }
+</script>
+
+</body>
+ 
 </html>
