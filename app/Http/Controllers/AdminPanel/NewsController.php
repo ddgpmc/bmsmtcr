@@ -68,5 +68,8 @@ class NewsController extends Controller
 
         return view('pages.ClientSide.userdashboard.news', compact('news'));
     }
-
+    public function show(News $news)
+    {
+        return view('pages.AdminPanel.news.show', compact('news'));
+    }
 }

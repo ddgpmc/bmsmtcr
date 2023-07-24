@@ -282,18 +282,13 @@
                                     <span class="text-danger error-text incident_narrative_error"></span>
                                  </div>
                               </div>
-
-
-
-
-
                         </div>
 
                         <div class="item form-group" style="margin-top: 1rem;">
                            <div class="col-md-12 col-sm-12 offset-md-4">
-                              <button type="submit" id="saveBtn" class="btn btn-success">Save New Blotters</button>
-                              <a class="btn btn-primary" type="button" data-dismiss="modal" style="margin-left: 4px;" >Cancel</a>
-                              <input class="btn btn-primary" type="reset" value="Reset">
+                              <button type="submit" id="saveBtn" class="btn bg-blue-500 hover:bg-blue-300">Save New Blotters</button>
+                              <a class="btn bg-red-500 hover:bg-red-300 text-white" type="button" data-dismiss="modal" style="margin-left: 4px;" >Cancel</a>
+                              <input class="btn bg-green-500 hover:bg-green-300" type="reset" value="Reset">
                            </div>
                         </div>
 
@@ -432,8 +427,6 @@
                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
                   });
-
-
 
                // PersonInvolves
 

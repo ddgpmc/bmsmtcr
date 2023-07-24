@@ -288,9 +288,9 @@
                         <div class="ln_solid"></div>
                         <div class="item form-group">
                            <div class="col-md-12 col-sm-12 offset-md-4">
-                              <button type="submit" id="submit" class="btn btn-success resident-button">Submit</button>
-                              <a class="btn btn-primary" type="button" data-dismiss="modal" style="margin-left: 4px;" >Cancel</a>
-                              <input class="btn btn-primary" type="reset" value="Reset">
+                              <button type="submit" id="submit" class="btn bg-blue-500 hover:bg-blue-300hover:bg-blue-300  resident-button">Submit</button>
+                              <a class="btn bg-red-500 hover:bg-red-300 text-white " type="button" data-dismiss="modal" style="margin-left: 4px;" >Cancel</a>
+                              <input class="btn bg-green-500 hover:bg-green-300" type="reset" value="Reset">
                            </div>
                         </div>
                      </form>

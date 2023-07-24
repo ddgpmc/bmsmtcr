@@ -46,7 +46,7 @@
                         <div class="bg-white p-8 shadow-md rounded-lg">
                             <h4 class="text-2xl font-bold mb-4">{{ $item->title }}</h4>
                             <p class="text-gray-700">{{ \Illuminate\Support\Str::limit($item->description, 100) }}</p>
-                            <a href="{{ route('news.show', $item) }}">Read More</a>
+                            <a class="text-blue-600" href="{{ route('news.show', $item) }}">Read More</a>
                         </div>
                     @empty
                         <div class="bg-white p-8 shadow-lg rounded-lg">

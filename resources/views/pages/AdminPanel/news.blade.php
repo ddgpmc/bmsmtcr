@@ -52,20 +52,27 @@
                 <td>{{ $item->title }}</td>
                 <td>{{ Str::limit($item->description, 100) }}</td>
                 <td>
-                    <!-- View Full Story button --> 
-                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
-                        View Full Story
-                    </button>
-                    
-                    <!-- Edit button -->
-                    <a href="{{ route('adminpanel.news.edit', $item) }}" class="btn btn-primary">Edit</a>
-                    
-                    <!-- Delete button -->
-                    <form action="{{ route('adminpanel.news.destroy', $item) }}" method="POST" style="display: inline-block">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn bg-red-200">Delete</button>
-                    </form>
+                <div class="row">
+    <div class="col-md-4">
+        <!-- View Full Story button --> 
+        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
+            View Full Story
+        </button>
+    </div>
+    <div class="col-md-4">
+        <!-- Edit button -->
+        <a href="{{ route('adminpanel.news.edit', $item) }}" class="btn btn-primary">Edit</a>
+    </div>
+    <div class="col-md-4">
+        <!-- Delete button -->
+        <form action="{{ route('adminpanel.news.destroy', $item) }}" method="POST" style="display: inline-block">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn bg-red-200">Delete</button>
+        </form>
+    </div>
+</div>
+
 
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
