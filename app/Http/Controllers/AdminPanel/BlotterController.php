@@ -47,6 +47,10 @@ class BlotterController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
+                "complainants" => "required",
+                "respondents" => "required",
+                "attackers" => "required",
+                "victims" => "required",
                 "incident_location" => "required",
                 "incident_type" => "required",
                 "date_incident" => "required",
@@ -55,11 +59,11 @@ class BlotterController extends Controller
                 "time_reported" => "required",
                 "status" => "required",
                 "incident_narrative" => "required",
-                // "residency"=> "required",
-                "Complainant" => "required",
-                "Respondent" => "required",
-                "Victim" => "required",
-                "Attacker" => "required"
+                "residency"=> "required",
+                // "Complainant" => "required",
+                // "Respondent" => "required",
+                // "Victim" => "required",
+                // "Attacker" => "required"
             ]
 
         );
@@ -88,6 +92,10 @@ class BlotterController extends Controller
             $blotters = blotters::updateOrCreate(
                 ['blotter_id' => $request->blotter_id],
                 [
+                    'complainants' => $request->complainants,
+                    'respondents' => $request->respondents,
+                    'attackers' => $request->attackers,
+                    'victims' => $request->victims,
                     'incident_location' => $request->incident_location,
                     'incident_type' => $request->incident_type,
                     'date_incident' => $request->date_incident,
@@ -103,19 +111,19 @@ class BlotterController extends Controller
                 ]
             );
 
-            $blotter_id = $blotters->blotter_id;
-            DB::table('person_involves')->where('blotter_id',  $blotter_id)->delete();
+            // $blotter_id = $blotters->blotter_id;
+            // DB::table('person_involves')->where('blotter_id',  $blotter_id)->delete();
 
-            foreach ($request->ids as $key => $ids) {
-                $data = new person_involve();
-                $data->blotter_id = $blotter_id;
-                $data->resident_id = $ids;
-                $data->person_involve = $request->person_involve[$key];
-                $data->involvement_type = $request->involvement_type[$key];
-                $data->save();
-            }
-            // $resi =  $request->residency;
-            dd( $request->ids);
+            // foreach ($request->ids as $key => $ids) {
+            //     $data = new person_involve();
+            //     $data->blotter_id = $blotter_id;
+            //     $data->resident_id = $ids;
+            //     $data->person_involve = $request->person_involve[$key];
+            //     $data->involvement_type = $request->involvement_type[$key];
+            //     $data->save();
+            // }
+            // // $resi =  $request->residency;
+            // dd( $request->ids);
 
 
             return response()->json(['success' => 'NewBlotter saved successfully.']);

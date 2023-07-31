@@ -13,6 +13,10 @@ class blotters extends Model
     public $primaryKey = 'blotter_id';
     // Timestamps
     protected $fillable = [
+        'complainants',
+        'respondents',
+        'attackers',
+        'victims',
         'incident_location',
         'incident_type',
         'date_incident',

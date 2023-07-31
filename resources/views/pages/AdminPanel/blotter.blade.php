@@ -40,20 +40,20 @@
             <div class="modal-body">
 
                         <div class="tab-nav " style="background: rgb(67, 0, 155);">
-                           <button class="tablinks btn btn-info active" onclick="schedules(event, 'schedule') ">Complainants</button>
+                           <!-- <button class="tablinks btn btn-info active" onclick="schedules(event, 'schedule') ">Complainants</button>
                            <button class="tablinks btn btn-info" onclick="schedules(event, 'respondents')">Respondents</button>
                            <button class="tablinks btn btn-info" onclick="schedules(event, 'victims')">Victims</button>
-                           <button class="tablinks btn btn-info" onclick="schedules(event, 'attackers')">Attackers</button>
+                           <button class="tablinks btn btn-info" onclick="schedules(event, 'attackers')">Attackers</button> -->
                            <button class="tablinks btn btn-info" onclick="schedules(event, 'inci_detail')">Incident Detail and Narrative</button>
                         </div>
 
                         <form id="blotterform"  name="blotterform" class="modal-input">
                            {{ csrf_field() }}
-                        <div id="schedule" class="tabcontent">
+                        <!-- <div id="schedule" class="tabcontent">
                            <div class="topnav navbar navbar">
                               <div>
                                  <h4 style="color: white">Adding Complainants</h4>
-                                 <!-- <div class="mb-3">
+                                 <div class="mb-3">
                                  <select class="form-control" name="residency" id="residency">
                                     <option hidden>Choose Residency</option>
                                 
@@ -61,7 +61,7 @@
                                     <option value="non-resident">Non-Resident</option>
                                   
                                  </select>
-                               </div> -->
+                               </div> 
                               </div>
                            </div>
 
@@ -181,7 +181,7 @@
                            </table>
 
                            <span class="text-danger error-text Attacker_error"></span>
-                        </div>
+                        </div> -->
 
 
 
@@ -190,7 +190,36 @@
 
                               <input type="hidden" name="blotter_id" id="blotter_id">
                               {{-- <input type="hidden" name="person_id" id="person_id"> --}}
-
+                              <div class="col-sm-6" >
+                                 <label >Complainants</label>
+                                 <input type="text" id="complainants" name="complainants"class="form-control ">
+                                 <span class="text-danger error-text complainants_error"></span>
+                                 </div>
+                                 <div class="col-sm-6" >
+                                 <label >Respondents</label>
+                                 <input type="text" id="respondents" name="respondents" class="form-control ">
+                                 <span class="text-danger error-text respondents_error"></span>
+                                 </div>
+                                 <div class="col-sm-6" >
+                                 <label >Attackers</label>
+                                 <input type="text" id="attackers" name="attackers" class="form-control ">
+                                 <span class="text-danger error-text attackers_error"></span>
+                                 </div>
+                                 <div class="col-sm-6" >
+                                 <label >Victims</label>
+                                 <input type="text" id="victims" name="victims"  class="form-control ">
+                                 <span class="text-danger error-text victims_error"></span>
+                                 </div>
+                                 <!-- <div class="col-sm-6" >
+                                <label >Residency:</label>
+                                 <select class="form-control" name="residency" id="residency">
+                                    <option hidden>Choose Residency</option>
+                                
+                                    <option value="Resident">Resident</option>
+                                    <option value="Non-resident">Non-Resident</option>
+                                    <span class="text-danger error-text residency_error"></span>
+                                 </select>
+                               </div> -->
                               <div class="row" style="margin-left: 0px;margin-right: 0px;">
                                  <div class="col-sm-6" >
                                  <label >Incident Location</label>
@@ -239,7 +268,7 @@
 
                                  </div>
 
-                                <div class="col-sm-6" >
+                                <!-- <div class="col-sm-6" >
                                 <label >Residency:</label>
                                  <select class="form-control" name="residency" id="residency">
                                     <option hidden>Choose Residency</option>
@@ -248,7 +277,7 @@
                                     <option value="Non-resident">Non-Resident</option>
                                   
                                  </select>
-                               </div>
+                               </div> -->
 
                                  <!-- <div class="col-sm-6" >
                                     <label >Time Schedule</label>
@@ -318,6 +347,10 @@
                      <tr class="headings">
                         <th class="column-title">Blotter Id</th>
                         <th class="column-title">Status</th>
+                        <th class="column-title">Complainants</th>
+                        <th class="column-title">Respondents</th>
+                        <th class="column-title">Attackers</th>
+                        <th class="column-title">Victims</th>
                         <th class="column-title">Incident Location</th>
                         <th class="column-title">Incident Type</th>
                         <th class="column-title">Incident Date</th>
@@ -331,6 +364,10 @@
                      <tr>
                         <td id="viewblotter_id"></td>
                         <td id="status"></td>
+                        <td id="viewcomplainants"></td>
+                        <td id="viewrespondents"></td>
+                        <td id="viewattackers"></td>
+                        <td id="viewvictims"></td>
                         <td id="viewincident_location"></td>
                         <td id="viewincident_type"></td>
                         <td id="viewdate_incident"></td>
@@ -343,7 +380,7 @@
                </table>
                <hr>
 
-               <h5>List of Person Involves</h5>
+               <!-- <h5>List of Person Involves</h5>
 
                <table id="blotter_list-table" class="bulk_action dataTables_info table datatable-element table-striped jambo_table bulk_action text-center border no-footer">
                   <thead>
@@ -360,7 +397,7 @@
 
 
                   </tbody>
-               </table>
+               </table> -->
                <h4>Incident Narrative</h4>
                <textarea name="viewincident_narrative" id="viewincident_narrative" rows="10" style="width: 100%; border:none;" disabled></textarea>
                {{-- <form id="blotterform"  name="blotterform" class="modal-input">
@@ -403,10 +440,11 @@
                   <tr class="headings">
                      <th class="column-title">Action</th>
                      <th class="column-title">Blotter Id </th>
+                     <th class="column-title">Complainants</th>
+                     <th class="column-title">Incident Type </th>
                      <th class="column-title">Blotter Status </th>
                      <th class="column-title">Date Recorded </th>
                      <th class="column-title">Time Recorded  </th>
-                     <th class="column-title">Incident Type </th>
                      <th class="column-title">Incident Date </th>
                      <th class="column-title">Incident Time</th>
                      <th class="bulk-actions" hidden colspan="7">
@@ -540,10 +578,12 @@
                   columns: [
                      {data: 'action', name: 'action', orderable: false, searchable: false},
                      {data: 'blotter_id', name: 'blotter_id'},
+                     {data: 'complainants', name: 'complainants'},
+                     {   data: 'incident_type', name: 'incident_type'},
                      {data: 'status', name: 'status'},
                      {   data: 'date_reported', name: 'date_reported'},
                      {  data: 'time_reported', name: 'time_reported'},
-                     {   data: 'incident_type', name: 'incident_type'},
+                     
                      {     data: 'date_incident', name: 'date_incident'},
                      { data: 'time_incident', name: 'time_incident'},
                      // { data: 'residency', name: 'residency'}
@@ -567,6 +607,10 @@
                   $.get("{{ route('blotters.index') }}" +'/' + blotter_id +'/edit', function (data) {
                      $('#viewmodelHeading').html("View BLotter");
                      $('#status').html(data[0].status);
+                     $('#viewcomplainants').html(data[0].complainants);
+                     $('#viewrespondents').html(data[0].respondents);
+                     $('#viewattackers').html(data[0].attackers);
+                     $('#viewvictims').html(data[0].victims);
                      $('#viewblottermodal').modal('show');
                      $('#viewblotter_id').html(data[0].blotter_id);
                      $('#viewincident_location').html(data[0].incident_location);
@@ -580,26 +624,26 @@
                      // $('#viewschedule_time').html(data[0].schedule_time);
                      $('#viewincident_narrative').val(data[0].incident_narrative);
 
-                     var len = data[1].length;
-                     var tbody = ' <tbody class="blotter-list-data"></tbody>';
-                     if(len > 0){
-                        $('.blotter-list-data').remove();
-                        $('#blotter_list-table').append(tbody);
-                        for(var i = 0; i <len;i++){
-                           var resident_id = data[1][i].resident_id;
-                           var person_involve = data[1][i].person_involve;
-                           var involvement_type = data[1][i].involvement_type;
-                           var tr = '<tr>'
-                           +'<td>'+ resident_id +'</td>'+
-                           '<td>'+ person_involve +'</td>'+
-                           '<td>'+ involvement_type +'</td>'+
-                           '</tr>'
-                        $('.blotter-list-data').append(tr);
-                        }
-                     }
-                     else{
-                        console.log("No BLotter Data Available");
-                     }
+                     // var len = data[1].length;
+                     // var tbody = ' <tbody class="blotter-list-data"></tbody>';
+                     // if(len > 0){
+                     //    $('.blotter-list-data').remove();
+                     //    $('#blotter_list-table').append(tbody);
+                     //    for(var i = 0; i <len;i++){
+                     //       var resident_id = data[1][i].resident_id;
+                     //       var person_involve = data[1][i].person_involve;
+                     //       var involvement_type = data[1][i].involvement_type;
+                     //       var tr = '<tr>'
+                     //       +'<td>'+ resident_id +'</td>'+
+                     //       '<td>'+ person_involve +'</td>'+
+                     //       '<td>'+ involvement_type +'</td>'+
+                     //       '</tr>'
+                     //    $('.blotter-list-data').append(tr);
+                     //    }
+                     // }
+                     // else{
+                     //    console.log("No BLotter Data Available");
+                     // }
                   })
                });
 
@@ -613,6 +657,10 @@
                      $('#saveBtn').val("edit-blotter");
                      $('#blottermodal').modal('show');
                      $('#blotter_id').val(data[0].blotter_id);
+                     $('#complainants').val(data[0].complainants);
+                     $('#respondents').val(data[0].respondents);
+                     $('#attackers').val(data[0].attackers);
+                     $('#victims').val(data[0].victims);
                      $('#incident_location').val(data[0].incident_location);
                      $('#incident_type').val(data[0].incident_type);
                      $('#date_incident').val(data[0].date_incident);
@@ -620,46 +668,46 @@
                      $('#date_reported').val(data[0].date_reported);
                      $('#time_reported').val(data[0].time_reported);
                      $('#schedule_date').val(data[0].schedule_date);
-                    
+                     $('#residency').val(data[0].residency);
                      // $('#schedule_time').val(data.schedule_time);
                      $('input[name^="status"][value="'+data[0].status+'"').prop('checked',true);
                      $('#incident_narrative').val(data[0].incident_narrative);
 
 
-                     var complainantLen = data[1].length;
-                     for(var i=0;i<complainantLen; i++){
-                        if(data[1][i].involvement_type == "Complainant" ){
-                           $('.addComplainantp' + data[1][i].resident_id).prop('checked',true);
-                           $('.addComplainant' + data[1][i].resident_id).prop('checked',true);
-                        }
-                     }
+                     // var complainantLen = data[1].length;
+                     // for(var i=0;i<complainantLen; i++){
+                     //    if(data[1][i].involvement_type == "Complainant" ){
+                     //       $('.addComplainantp' + data[1][i].resident_id).prop('checked',true);
+                     //       $('.addComplainant' + data[1][i].resident_id).prop('checked',true);
+                     //    }
+                     // }
 
-                     var respondentLen = data[1].length;
-                     for(var i=0;i<respondentLen; i++){
-                        if(data[1][i].involvement_type == "Respondent" ){
-                           $('.addRespondentp' + data[1][i].resident_id).prop('checked',true);
-                           $('.addRespondent' + data[1][i].resident_id).prop('checked',true);
-                        }
+                     // var respondentLen = data[1].length;
+                     // for(var i=0;i<respondentLen; i++){
+                     //    if(data[1][i].involvement_type == "Respondent" ){
+                     //       $('.addRespondentp' + data[1][i].resident_id).prop('checked',true);
+                     //       $('.addRespondent' + data[1][i].resident_id).prop('checked',true);
+                     //    }
 
-                     }
+                     // }
 
-                     var victimLen = data[1].length;
-                     for(var i=0;i<victimLen; i++){
-                        if(data[1][i].involvement_type == "Victim" ){
-                           $('.addVictimp' + data[1][i].resident_id).prop('checked',true);
-                           $('.addVictim' + data[1][i].resident_id).prop('checked',true);
-                        }
+                     // var victimLen = data[1].length;
+                     // for(var i=0;i<victimLen; i++){
+                     //    if(data[1][i].involvement_type == "Victim" ){
+                     //       $('.addVictimp' + data[1][i].resident_id).prop('checked',true);
+                     //       $('.addVictim' + data[1][i].resident_id).prop('checked',true);
+                     //    }
 
-                     }
+                     // }
 
-                     var attackerLen = data[1].length;
-                     for(var i=0;i<attackerLen; i++){
-                        if(data[1][i].involvement_type == "Attacker" ){
-                           $('.addAttackerp' + data[1][i].resident_id).prop('checked',true);
-                           $('.addAttacker' + data[1][i].resident_id).prop('checked',true);
-                        }
+                     // var attackerLen = data[1].length;
+                     // for(var i=0;i<attackerLen; i++){
+                     //    if(data[1][i].involvement_type == "Attacker" ){
+                     //       $('.addAttackerp' + data[1][i].resident_id).prop('checked',true);
+                     //       $('.addAttacker' + data[1][i].resident_id).prop('checked',true);
+                     //    }
 
-                     }
+                     // }
                   })
                });
 
