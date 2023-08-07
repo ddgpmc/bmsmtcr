@@ -17,6 +17,14 @@ use Illuminate\Support\Facades\Validator;
 class BlotterController extends Controller
 {
 
+    public function blotter()
+{
+    // Get the residents' information from the resident_info model
+    $residents = resident_info::all();
+
+    // Pass the $residents variable to the view
+    return view('pages.AdminPanel.blotter', compact('residents'));
+}
     public function index(Request $request)
     {
         $blotters = blotters::latest()->get();
@@ -41,16 +49,15 @@ class BlotterController extends Controller
         return view('pages.AdminPanel.blotter',  compact('blotters'));
     }
 
-
     public function store(Request $request)
     {
         $validator = Validator::make(
             $request->all(),
             [
-                "complainants" => "required",
-                "respondents" => "required",
-                "attackers" => "required",
-                "victims" => "required",
+                // "complainants" => "required",
+                // "respondents" => "required",
+                // "attackers" => "required",
+                // "victims" => "required",
                 "incident_location" => "required",
                 "incident_type" => "required",
                 "date_incident" => "required",
@@ -59,7 +66,7 @@ class BlotterController extends Controller
                 "time_reported" => "required",
                 "status" => "required",
                 "incident_narrative" => "required",
-                "residency"=> "required",
+                // "residency"=> "required",
                 // "Complainant" => "required",
                 // "Respondent" => "required",
                 // "Victim" => "required",
@@ -73,12 +80,6 @@ class BlotterController extends Controller
             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
 
-            // if ($request->schedule_date != null && $request->schedule_time != null) {
-            //     $request->schedule = "Schedule";
-            // } else {
-            //     $request->schedule = "Unschedule";
-            // }
-
             if ($request->schedule_date != null) {
                 $request->schedule = "Schedule";
             } else {
@@ -88,14 +89,139 @@ class BlotterController extends Controller
             if ($request->status == "Settled") {
                 $request->schedule = "Settled";
             }
+	
+	if($request->complainantsInput == "" && $request->respondentsInput == "" && $request->attackersInput == "" && $request->victimsInput == "")
+	{
+		   $complainants = $request->complainantsDropdown;
+                    $respondents = $request->respondentsDropdown;
+                    $attackers = $request->attackersDropdown;
+                    $victims = $request->victimsDropdown;
+           
 
-            $blotters = blotters::updateOrCreate(
+       }
+	elseif($request->complainantsDropdown == "0" && $request->respondentsDropdown == "0" && $request->attackersDropdown == "0" && $request->victimsDropdown == "0")
+	{
+		
+            	$complainants = $request->complainantsInput;
+		$respondents =	$request->respondentsInput;
+		$attackers = $request->attackersInput;
+		$victims = $request->victimsInput;
+       }
+       elseif ($request->complainantsDropdown == "0" && $request->respondentsInput == "" && $request->attackersInput == "" && $request->victimsInput == "")
+       {
+           $complainants = $request->complainantsInput;
+           $respondents = $request->respondentsDropdown;
+           $attackers = $request->attackersDropdown;
+           $victims = $request->victimsDropdown;
+       }
+       elseif ($request->complainantsInput == "" && $request->respondentsDropdown == "0" && $request->attackersInput == "" && $request->victimsInput == "")
+       {
+           $complainants = $request->complainantsDropdown;
+           $respondents = $request->respondentsInput;
+           $attackers = $request->attackersDropdown;
+           $victims = $request->victimsDropdown;
+       }
+       elseif ($request->complainantsInput == "" && $request->respondentsInput == "" && $request->attackersDropdown == "0" && $request->victimsInput == "")
+       {
+           $complainants = $request->complainantsDropdown;
+           $respondents = $request->respondentsDropdown;
+           $attackers = $request->attackersInput;
+           $victims = $request->victimsDropdown;
+       }
+       elseif ($request->complainantsInput == "" && $request->respondentsInput == "" && $request->attackersInput == "" && $request->victimsDropdown == "0")
+       {
+           $complainants = $request->complainantsDropdown;
+           $respondents = $request->respondentsDropdown;
+           $attackers = $request->attackersDropdown;
+           $victims = $request->victimsInput;
+       }
+       elseif ($request->complainantsDropdown == "0" && $request->respondentsDropdown == "0" && $request->attackersInput == "" && $request->victimsInput == "")
+       {
+           $complainants = $request->complainantsInput;
+           $respondents = $request->respondentsInput;
+           $attackers = $request->attackersDropdown;
+           $victims = $request->victimsDropdown;
+       }
+       elseif ($request->complainantsDropdown == "0" && $request->respondentsInput == "" && $request->attackersDropdown == "0" && $request->victimsInput == "")
+       {
+           $complainants = $request->complainantsInput;
+           $respondents = $request->respondentsDropdown;
+           $attackers = $request->attackersInput;
+           $victims = $request->victimsDropdown;
+       }
+       elseif ($request->complainantsDropdown == "0" && $request->respondentsInput == "" && $request->attackersInput == "" && $request->victimsDropdown == "0")
+       {
+           $complainants = $request->complainantsInput;
+           $respondents = $request->respondentsDropdown;
+           $attackers = $request->attackersDropdown;
+           $victims = $request->victimsInput;
+       }
+       elseif ($request->complainantsInput == "" && $request->respondentsDropdown == "0" && $request->attackersDropdown == "0" && $request->victimsInput == "")
+       {
+           $complainants = $request->complainantsDropdown;
+           $respondents = $request->respondentsInput;
+           $attackers = $request->attackersInput;
+           $victims = $request->victimsDropdown;
+       }
+       elseif ($request->complainantsInput == "" && $request->respondentsDropdown == "0" && $request->attackersInput == "" && $request->victimsDropdown == "0")
+       {
+           $complainants = $request->complainantsDropdown;
+           $respondents = $request->respondentsInput;
+           $attackers = $request->attackersDropdown;
+           $victims = $request->victimsInput;
+       }
+       elseif ($request->complainantsInput == "" && $request->respondentsInput == "" && $request->attackersDropdown == "0" && $request->victimsDropdown == "0")
+       {
+           $complainants = $request->complainantsDropdown;
+           $respondents = $request->respondentsDropdown;
+           $attackers = $request->attackersInput;
+           $victims = $request->victimsInput;
+       }
+       elseif ($request->complainantsDropdown == "0" && $request->respondentsDropdown == "0" && $request->attackersDropdown == "0" && $request->victimsInput == "")
+       {
+           $complainants = $request->complainantsInput;
+           $respondents = $request->respondentsInput;
+           $attackers = $request->attackersInput;
+           $victims = $request->victimsDropdown;
+       }
+       elseif ($request->complainantsDropdown == "0" && $request->respondentsDropdown == "0" && $request->attackersInput == "" && $request->victimsDropdown == "0")
+       {
+           $complainants = $request->complainantsInput;
+           $respondents = $request->respondentsInput;
+           $attackers = $request->attackersDropdown;
+           $victims = $request->victimsInput;
+       }
+       elseif ($request->complainantsDropdown == "0" && $request->respondentsInput == "" && $request->attackersDropdown == "0" && $request->victimsDropdown == "0")
+       {
+           $complainants = $request->complainantsInput;
+           $respondents = $request->respondentsDropdown;
+           $attackers = $request->attackersInput;
+           $victims = $request->victimsInput;
+       }
+       elseif ($request->complainantsInput == "" && $request->respondentsDropdown == "0" && $request->attackersDropdown == "0" && $request->victimsDropdown == "0")
+       {
+           $complainants = $request->complainantsDropdown;
+           $respondents = $request->respondentsInput;
+           $attackers = $request->attackersInput;
+           $victims = $request->victimsInput;
+       }
+       elseif ($request->complainantsDropdown == "0" && $request->respondentsDropdown == "0" && $request->attackersDropdown == "0" && $request->victimsDropdown == "0")
+       {
+           $complainants = $request->complainantsInput;
+           $respondents = $request->respondentsInput;
+           $attackers = $request->attackersInput;
+           $victims = $request->victimsInput;
+       }
+                                                                                                         
+
+
+ 	$blotters = blotters::updateOrCreate(
                 ['blotter_id' => $request->blotter_id],
                 [
-                    'complainants' => $request->complainants,
-                    'respondents' => $request->respondents,
-                    'attackers' => $request->attackers,
-                    'victims' => $request->victims,
+                    'complainants' => $complainants,
+                    'respondents' => $respondents,
+                    'attackers' => $attackers,
+                    'victims' => $victims,
                     'incident_location' => $request->incident_location,
                     'incident_type' => $request->incident_type,
                     'date_incident' => $request->date_incident,
@@ -107,39 +233,23 @@ class BlotterController extends Controller
                     // 'schedule_time' => $request->schedule_time,
                     'schedule' => $request->schedule,
                     'incident_narrative' => $request->incident_narrative,
-                    'residency' => $request->residency
+                    // 'residency' => $request->residency
                 ]
             );
-
-            // $blotter_id = $blotters->blotter_id;
-            // DB::table('person_involves')->where('blotter_id',  $blotter_id)->delete();
-
-            // foreach ($request->ids as $key => $ids) {
-            //     $data = new person_involve();
-            //     $data->blotter_id = $blotter_id;
-            //     $data->resident_id = $ids;
-            //     $data->person_involve = $request->person_involve[$key];
-            //     $data->involvement_type = $request->involvement_type[$key];
-            //     $data->save();
-            // }
-            // // $resi =  $request->residency;
-            // dd( $request->ids);
+ 	
 
 
-            return response()->json(['success' => 'NewBlotter saved successfully.']);
+            return response()->json(['success' => 'NewBlotter saved successfully.']); 
         }
     }
-
-
     public function show(blotters $blotter)
     {
         if (!session()->has("user")) {
             return redirect("login");
         }
         
-        $resident = resident_info::all();
-        $blotter = blotters::all();
-        return view('pages.AdminPanel.blotter', ['blotter' => $blotter,  'resident' => $resident]);
+        $residents = resident_info::all();
+        return view('pages.AdminPanel.blotter', ['blotter' => $blotter, 'residents' => $residents]);
     }
 
 
@@ -151,8 +261,6 @@ class BlotterController extends Controller
 
         return response()->json([$blotter, $person_involve]);
     }
-
-
 
 
 

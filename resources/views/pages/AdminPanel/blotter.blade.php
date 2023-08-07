@@ -13,9 +13,16 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href={{ URL::asset('css/ClientCSS/Contact-Form-Clean.css') }}>
     <link rel="stylesheet" href={{ URL::asset('css/ClientCSS/Footer-Clean.css') }}>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+   <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <link rel="stylesheet" href={{ URL::asset('css/ClientCSS/Header-Blue.css') }}>
     <link rel="stylesheet" href={{ URL::asset('css/ClientCSS/styles.css') }}>
-</head>
+</head><style>
+  .small-btn {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+</style>
 @extends('layouts.apps')
 
 @section('content')
@@ -36,190 +43,87 @@
                <span aria-hidden="true">&times;</span>
                </button>
             </div>
-
             <div class="modal-body">
 
                         <div class="tab-nav " style="background: rgb(67, 0, 155);">
-                           <!-- <button class="tablinks btn btn-info active" onclick="schedules(event, 'schedule') ">Complainants</button>
-                           <button class="tablinks btn btn-info" onclick="schedules(event, 'respondents')">Respondents</button>
-                           <button class="tablinks btn btn-info" onclick="schedules(event, 'victims')">Victims</button>
-                           <button class="tablinks btn btn-info" onclick="schedules(event, 'attackers')">Attackers</button> -->
                            <button class="tablinks btn btn-info" onclick="schedules(event, 'inci_detail')">Incident Detail and Narrative</button>
                         </div>
 
                         <form id="blotterform"  name="blotterform" class="modal-input">
                            {{ csrf_field() }}
-                        <!-- <div id="schedule" class="tabcontent">
-                           <div class="topnav navbar navbar">
-                              <div>
-                                 <h4 style="color: white">Adding Complainants</h4>
-                                 <div class="mb-3">
-                                 <select class="form-control" name="residency" id="residency">
-                                    <option hidden>Choose Residency</option>
-                                
-                                    <option value="resident">Resident</option>
-                                    <option value="non-resident">Non-Resident</option>
-                                  
-                                 </select>
-                               </div> 
-                              </div>
-                           </div>
-
-                           <table  class=" overflow-auto bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border no-footer complainants-table">
-                              <thead>
-                                 <tr class="headings">
-                                    <th class="column-title">Action</th>
-                                    <th class="column-title">FullName</th>
-                                    <th class="column-title">Alias</th>
-                                    <th class="column-title">FirstName</th>
-                                    <th class="column-title">MiddleName</th>
-                                    <th class="column-title">LastName</th>
-                                    <th class="bulk-actions" hidden colspan="7">
-                                       <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                                    </th>
-                                 </tr>
-                              </thead>
-                              <tbody>
-
-
-                              </tbody>
-                           </table>
-                           <span class="text-danger error-text Complainant_error"></span>
-
-
-                        </div>
-
-
-
-                        <div id="respondents" class="tabcontent">
-                           <div class="topnav navbar navbar">
-                              <div>
-                                 <h4 style="color: white">Adding Respondents</h4>
-                              </div>
-                           </div>
-
-                           <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border no-footer respondents-table">
-                              <thead>  
-                                 <tr class="headings">
-                                    <th class="column-title">Action</th>
-                                    <th class="column-title">FullName</th>
-                                    <th class="column-title">Alias</th>
-                                    <th class="column-title">FirstName</th>
-                                    <th class="column-title">MiddleName</th>
-                                    <th class="column-title">LastName</th>
-                                    <th class="bulk-actions" hidden colspan="7">
-                                       <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                                    </th>
-                                 </tr>
-                              </thead>
-                              <tbody>
-
-
-                              </tbody>
-                           </table>
-
-                           <span class="text-danger error-text Respondent_error"></span>
-
-                        </div>
-
-                        <div id="victims" class="tabcontent">
-                           <div class="topnav navbar navbar">
-                              <div>
-                                 <h4 style="color: white">Adding Victims</h4>
-                              </div>
-                           </div>
-                           <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border no-footer victims-table">
-                              <thead>
-                                 <tr class="headings">
-                                    <th class="column-title">Action</th>
-                                    <th class="column-title">FullName</th>
-                                    <th class="column-title">Alias</th>
-                                    <th class="column-title">FirstName</th>
-                                    <th class="column-title">MiddleName</th>
-                                    <th class="column-title">LastName</th>
-                                    <th class="bulk-actions" hidden colspan="7">
-                                       <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                                    </th>
-                                 </tr>
-                              </thead>
-                              <tbody>
-
-
-                              </tbody>
-                           </table>
-
-                           <span class="text-danger error-text Victim_error"></span>
-
-                        </div>
-
-                        <div id="attackers" class="tabcontent">
-                           <div class="topnav navbar navbar">
-                              <div>
-                                 <h4 style="color: white">Adding Attackers</h4>
-                              </div>
-
-                           </div>
-
-                           <table  class="bulk_action dataTables_info table resident-table datatable-element resident table-striped jambo_table bulk_action text-center border no-footer attackers-table">
-                              <thead>
-                                 <tr class="headings">
-                                    <th class="column-title">Action</th>
-                                    <th class="column-title">FullName</th>
-                                    <th class="column-title">Alias</th>
-                                    <th class="column-title">FirstName</th>
-                                    <th class="column-title">MiddleName</th>
-                                    <th class="column-title">LastName</th>
-                                    <th class="bulk-actions" hidden colspan="7">
-                                       <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                                    </th>
-                                 </tr>
-                              </thead>
-                              <tbody>
-
-
-                              </tbody>
-                           </table>
-
-                           <span class="text-danger error-text Attacker_error"></span>
-                        </div> -->
-
-
-
-
                         <div id="inci_detail" class="tabcontent">
 
                               <input type="hidden" name="blotter_id" id="blotter_id">
                               {{-- <input type="hidden" name="person_id" id="person_id"> --}}
-                              <div class="col-sm-6" >
-                                 <label >Complainants</label>
-                                 <input type="text" id="complainants" name="complainants"class="form-control ">
-                                 <span class="text-danger error-text complainants_error"></span>
-                                 </div>
-                                 <div class="col-sm-6" >
-                                 <label >Respondents</label>
-                                 <input type="text" id="respondents" name="respondents" class="form-control ">
-                                 <span class="text-danger error-text respondents_error"></span>
-                                 </div>
-                                 <div class="col-sm-6" >
-                                 <label >Attackers</label>
-                                 <input type="text" id="attackers" name="attackers" class="form-control ">
-                                 <span class="text-danger error-text attackers_error"></span>
-                                 </div>
-                                 <div class="col-sm-6" >
-                                 <label >Victims</label>
-                                 <input type="text" id="victims" name="victims"  class="form-control ">
-                                 <span class="text-danger error-text victims_error"></span>
-                                 </div>
-                                 <!-- <div class="col-sm-6" >
-                                <label >Residency:</label>
-                                 <select class="form-control" name="residency" id="residency">
-                                    <option hidden>Choose Residency</option>
-                                
-                                    <option value="Resident">Resident</option>
-                                    <option value="Non-resident">Non-Resident</option>
-                                    <span class="text-danger error-text residency_error"></span>
+                              <!-- Dropdown for Complainants -->
+                              <div class="col-sm-6">
+                              <label class="block">Complainants</label>
+                              <div class="relative flex items-center">
+                                 <select class="form-control resident-dropdown mr-4" id="complainantsDropdown" name="complainantsDropdown">
+                                    <option value="0">Choose Complainant</option>
+                                    <!-- Use a loop to generate the options dynamically -->
+                                    @foreach ($residents as $resident)
+                                       <option value="{{ $resident->firstname.' '.$resident->lastname  }}">{{ $resident->firstname }} {{ $resident->lastname }}</option>
+                                    @endforeach
                                  </select>
-                               </div> -->
+                                 <input type="text" class="form-control non-resident-input hidden block mb-2 mr-2 text-sm font-medium text-gray-900 dark:text-black" id="complainantsInput" name="complainantsInput" placeholder="Enter Complainant's Name">
+                                 <input type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" id="complainantsNonResident">
+                                 <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-600" for="complainantsNonResident">Non-Resident</label>
+                              </div>
+                              <span class="text-red-500 error-text complainants_error"></span>
+                           </div>
+
+                           <div class="col-sm-6">
+                              <label class="block">Respondents</label>
+                              <div class="relative flex items-center">
+                                 <select class="form-control resident-dropdown mr-4" id="respondentsDropdown" name="respondentsDropdown">
+                                    <option value="0">Choose Respondent</option>
+                                    <!-- Use a loop to generate the options dynamically -->
+                                    @foreach ($residents as $resident)
+                                       <option value="{{ $resident->firstname.' '.$resident->lastname   }}">{{ $resident->firstname }} {{ $resident->lastname }}</option>
+                                    @endforeach
+                                 </select>
+                                 <input type="text" class="form-control non-resident-input hidden  block mb-2 mr-2 text-sm font-medium text-gray-900 dark:text-black" id="respondentsInput" name="respondentsInput" placeholder="Enter Respondent's Name">
+                                 <input type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" id="respondentsNonResident">
+                                 <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-600" for="respondentsNonResident">Non-Resident</label>
+                              </div>
+                              <span class="text-red-500 error-text respondents_error"></span>
+                           </div>
+
+                           <div class="col-sm-6">
+                              <label class="block">Attackers</label>
+                              <div class="relative flex items-center">
+                                 <select class="form-control resident-dropdown mr-4" id="attackersDropdown" name="attackersDropdown">
+                                    <option value="0">Choose Attacker</option>
+                                    <!-- Use a loop to generate the options dynamically -->
+                                    @foreach ($residents as $resident)
+                                       <option value="{{  $resident->firstname.' '.$resident->lastname  }}">{{ $resident->firstname }} {{ $resident->lastname }}</option>
+                                    @endforeach
+                                 </select>
+                                 <input type="text" class="form-control non-resident-input hidden  block mb-2 mr-2 text-sm font-medium text-gray-900 dark:text-black" id="attackersInput"  name="attackersInput"  placeholder="Enter Attacker's Name">
+                                 <input type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" id="attackersNonResident">
+                                 <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-600" for="attackersNonResident">Non-Resident</label>
+                              </div>
+                              <span class="text-red-500 error-text attackers_error"></span>
+                           </div>
+
+                           <div class="col-sm-6">
+                              <label class="block">Victims</label>
+                              <div class="relative flex items-center">
+                                 <select class="form-control resident-dropdown mr-4" id="victimsDropdown" name="victimsDropdown">
+                                    <option value="0">Choose Victim</option>
+                                    <!-- Use a loop to generate the options dynamically -->
+                                    @foreach ($residents as $resident)
+                                       <option value="{{  $resident->firstname.' '.$resident->lastname   }}">{{ $resident->firstname }} {{ $resident->lastname }}</option>
+                                    @endforeach
+                                 </select>
+                                 <input type="text" class="form-control non-resident-input hidden  block mb-2 mr-2 text-sm font-medium text-gray-900 dark:text-black" id="victimsInput" name="victimsInput" placeholder="Enter Victim's Name">
+                                 <input type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" id="victimsNonResident">
+                                 <label class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-600" for="victimsNonResident">Non-Resident</label>
+                              </div>
+                              <span class="text-red-500 error-text victims_error"></span>
+                           </div>
+
                               <div class="row" style="margin-left: 0px;margin-right: 0px;">
                                  <div class="col-sm-6" >
                                  <label >Incident Location</label>
@@ -227,7 +131,7 @@
                                  <span class="text-danger error-text incident_location_error"></span>
                                  </div>
                                  <div class="col-sm-6" >
-                                    <label >Incident type</label>
+                                    <label >Incident type</label> 
                                     <input type="text" id="incident_type" name="incident_type" required="required" class="form-control ">
                                     <span class="text-danger error-text incident_type_error"></span>
                                  </div>
@@ -267,22 +171,6 @@
                                  <input type="text" id="schedule" name="schedule" hidden>
 
                                  </div>
-
-                                <!-- <div class="col-sm-6" >
-                                <label >Residency:</label>
-                                 <select class="form-control" name="residency" id="residency">
-                                    <option hidden>Choose Residency</option>
-                                
-                                    <option value="Resident">Resident</option>
-                                    <option value="Non-resident">Non-Resident</option>
-                                  
-                                 </select>
-                               </div> -->
-
-                                 <!-- <div class="col-sm-6" >
-                                    <label >Time Schedule</label>
-                                    <input type="time" id="schedule_time" name="schedule_time" required="required" class="form-control ">
-                                 </div> -->
 
                               </div>
 
@@ -342,62 +230,43 @@
             </div>
 
             <div class="modal-body">
-               <table  class="bulk_action dataTables_info table datatable-element table-striped jambo_table bulk_action text-center border no-footer">
-                  <thead>
-                     <tr class="headings">
-                        <th class="column-title">Blotter Id</th>
-                        <th class="column-title">Status</th>
-                        <th class="column-title">Complainants</th>
-                        <th class="column-title">Respondents</th>
-                        <th class="column-title">Attackers</th>
-                        <th class="column-title">Victims</th>
-                        <th class="column-title">Incident Location</th>
-                        <th class="column-title">Incident Type</th>
-                        <th class="column-title">Incident Date</th>
-                        <th class="column-title">Incident Time</th>
-                        <th class="column-title">Schedule Date</th>
-                        <th class="column-title">Residency</th>
-                        {{-- <th class="column-title">Schedule Time</th> --}}
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                        <td id="viewblotter_id"></td>
-                        <td id="status"></td>
-                        <td id="viewcomplainants"></td>
-                        <td id="viewrespondents"></td>
-                        <td id="viewattackers"></td>
-                        <td id="viewvictims"></td>
-                        <td id="viewincident_location"></td>
-                        <td id="viewincident_type"></td>
-                        <td id="viewdate_incident"></td>
-                        <td id="viewtimeof_incident"></td>
-                        <td id="viewschedule_date"></td>
-                        <td id="viewresidency"></td>
-                        {{-- <td id="viewschedule_time"></td> --}}
-                     </tr>
-                  </tbody>
-               </table>
-               <hr>
-
-               <!-- <h5>List of Person Involves</h5>
-
-               <table id="blotter_list-table" class="bulk_action dataTables_info table datatable-element table-striped jambo_table bulk_action text-center border no-footer">
-                  <thead>
-                     <tr class="headings">
-                        <th class="column-title">Resident Id</th>
-                        <th class="column-title">FullName</th>
-                        <th class="column-title">Involvement Type</th>
-                        <th class="bulk-actions" hidden colspan="7">
-                           <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                        </th>
-                     </tr>
-                  </thead>
-                  <tbody class="blotter-list-data">
-
-
-                  </tbody>
-               </table> -->
+    <table class="bulk_action dataTables_info table datatable-element table-striped jambo_table bulk_action text-center border no-footer">
+        <thead>
+            <tr class="headings">
+                <th class="column-title">Blotter Id</th>
+                <th class="column-title">Status</th>
+                <th class="column-title">Complainants</th>
+                <th class="column-title">Respondents</th>
+                <th class="column-title">Attackers</th>
+                <th class="column-title">Victims</th>
+                <th class="column-title">Incident Location</th>
+                <th class="column-title">Incident Type</th>
+                <th class="column-title">Incident Date</th>
+                <th class="column-title">Incident Time</th>
+                <th class="column-title">Schedule Date</th>
+                <!-- <th class="column-title">Residency</th> -->
+                {{-- <th class="column-title">Schedule Time</th> --}}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="viewblotter_id" class="py-4"></td>
+                <td id="status" class="py-4"></td>
+                <td id="viewcomplainants" class="py-4"></td>
+                <td id="viewrespondents" class="py-4"></td>
+                <td id="viewattackers" class="py-4"></td>
+                <td id="viewvictims" class="py-4"></td>
+                <td id="viewincident_location" class="py-4"></td>
+                <td id="viewincident_type" class="py-4"></td>
+                <td id="viewdate_incident" class="py-4"></td>
+                <td id="viewtimeof_incident" class="py-4"></td>
+                <td id="viewschedule_date" class="py-4"></td>
+                <!-- <td id="viewresidency" class="py-4"></td> -->
+                {{-- <td id="viewschedule_time" class="py-4"></td> --}}
+            </tr>
+        </tbody>
+    </table>
+    <hr>
                <h4>Incident Narrative</h4>
                <textarea name="viewincident_narrative" id="viewincident_narrative" rows="10" style="width: 100%; border:none;" disabled></textarea>
                {{-- <form id="blotterform"  name="blotterform" class="modal-input">
@@ -435,26 +304,27 @@
 
 
 
-   <table id="blotter-table" class="bulk_action dataTables_info table datatable-element resident table-striped jambo_table bulk_action text-center border dataTable no-footer data-table">
-               <thead>
-                  <tr class="headings">
-                     <th class="column-title">Action</th>
-                     <th class="column-title">Blotter Id </th>
-                     <th class="column-title">Complainants</th>
-                     <th class="column-title">Incident Type </th>
-                     <th class="column-title">Blotter Status </th>
-                     <th class="column-title">Date Recorded </th>
-                     <th class="column-title">Time Recorded  </th>
-                     <th class="column-title">Incident Date </th>
-                     <th class="column-title">Incident Time</th>
-                     <th class="bulk-actions" hidden colspan="7">
-                        <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                     </th>
-                  </tr>
-               </thead>
-               <tbody>
-               </tbody>
-      </table>
+         <table id="blotter-table" class="bulk_action dataTables_info table datatable-element resident table-striped jambo_table bulk_action text-center border dataTable no-footer data-table">
+        <thead  class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th class="column-title">Action</th>
+                <th class="column-title">Blotter Id</th>
+                <th class="column-title">Complainants</th>
+                <th class="column-title">Incident Type</th>
+                <th class="column-title">Blotter Status</th>
+                <th class="column-title">Date Recorded</th>
+                <th class="column-title">Time Recorded</th>
+                <th class="column-title">Incident Date</th>
+                <th class="column-title">Incident Time</th>
+                <th class="bulk-actions" hidden colspan="7">
+                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
             <script type="text/javascript">
@@ -467,6 +337,13 @@
                   });
 
                // PersonInvolves
+               // JavaScript code to handle the selection of dropdowns and set their values
+               $(document).ready(function() {
+                  $('#complainants, #respondents, #attackers, #victims').change(function() {
+                     var selectedOption = $(this).children("option:selected").text();
+                     $(this).prev().val(selectedOption);
+                  });
+               });
 
                // Adding Complainants
                var complainants_table = $('.complainants-table').DataTable({
@@ -576,8 +453,26 @@
                   serverSide: true,
                   ajax: "{{ route('blotters.index') }}",
                   columns: [
-                     {data: 'action', name: 'action', orderable: false, searchable: false},
-                     {data: 'blotter_id', name: 'blotter_id'},
+                     {data: 'action', name: 'action', orderable: false, searchable: false, render: function(data, type, row) {
+               // Render the action icons with Font Awesome
+               return `
+                  <a href="#" class="btn btn-sm btn-primary viewBlotter" data-id="${row.blotter_id}">
+                     <i class="fas fa-eye"></i>
+                  </a>
+                  <a href="#" class="btn btn-sm btn-info editBlotter" data-id="${row.blotter_id}">
+                     <i class="fas fa-edit"></i>
+                  </a>
+                  <a href="#" class="btn btn-sm btn-danger deleteBlotter" data-id="${row.blotter_id}">
+                     <i class="fas fa-trash"></i>
+                  </a>
+               `;
+            }},
+                     { data: 'blotter_id',
+                       name: 'blotter_id',
+                       render: function (data, type, row) {
+                        // Create a hyperlink for the blotter_id
+                        return '<a class="text-blue-500" href="' + "{{ route('blotters.index') }}" + '/' + data + '">' + data + '</a>';
+                     }},
                      {data: 'complainants', name: 'complainants'},
                      {   data: 'incident_type', name: 'incident_type'},
                      {data: 'status', name: 'status'},
@@ -590,7 +485,26 @@
                   ]
 
                });
+               function toggleResidentSelection(sectionId) {
+                  const checkbox = document.getElementById(`${sectionId}NonResident`);
+                  const dropdown = document.getElementById(`${sectionId}Dropdown`);
+                  const input = document.getElementById(`${sectionId}Input`);
 
+                  if (checkbox.checked) {
+                     dropdown.style.display = "none";
+                     input.style.display = "block";
+                  } else {
+                     dropdown.style.display = "block";
+                     input.style.display = "none";
+                  }
+               }
+
+   // Attach event listeners to each "non-resident" checkbox
+   const sectionIds = ['complainants', 'respondents', 'attackers', 'victims'];
+   sectionIds.forEach((sectionId) => {
+      const checkbox = document.getElementById(`${sectionId}NonResident`);
+      checkbox.addEventListener('change', () => toggleResidentSelection(sectionId));
+   });
 
                $('#createNewBlotter').click(function () {
                   $("#saveBtn").attr("disabled", false);
@@ -605,7 +519,7 @@
                $('body').on('click', '.viewBlotter', function(){
                   var blotter_id = $(this).data('id');
                   $.get("{{ route('blotters.index') }}" +'/' + blotter_id +'/edit', function (data) {
-                     $('#viewmodelHeading').html("View BLotter");
+                     $('#viewmodelHeading').html("View Blotter");
                      $('#status').html(data[0].status);
                      $('#viewcomplainants').html(data[0].complainants);
                      $('#viewrespondents').html(data[0].respondents);
@@ -620,30 +534,8 @@
 
 
                      $('#viewschedule_date').html(data[0].schedule_date);
-                     $('#viewresidency').html(data[0].residency);
-                     // $('#viewschedule_time').html(data[0].schedule_time);
                      $('#viewincident_narrative').val(data[0].incident_narrative);
 
-                     // var len = data[1].length;
-                     // var tbody = ' <tbody class="blotter-list-data"></tbody>';
-                     // if(len > 0){
-                     //    $('.blotter-list-data').remove();
-                     //    $('#blotter_list-table').append(tbody);
-                     //    for(var i = 0; i <len;i++){
-                     //       var resident_id = data[1][i].resident_id;
-                     //       var person_involve = data[1][i].person_involve;
-                     //       var involvement_type = data[1][i].involvement_type;
-                     //       var tr = '<tr>'
-                     //       +'<td>'+ resident_id +'</td>'+
-                     //       '<td>'+ person_involve +'</td>'+
-                     //       '<td>'+ involvement_type +'</td>'+
-                     //       '</tr>'
-                     //    $('.blotter-list-data').append(tr);
-                     //    }
-                     // }
-                     // else{
-                     //    console.log("No BLotter Data Available");
-                     // }
                   })
                });
 
@@ -668,46 +560,9 @@
                      $('#date_reported').val(data[0].date_reported);
                      $('#time_reported').val(data[0].time_reported);
                      $('#schedule_date').val(data[0].schedule_date);
-                     $('#residency').val(data[0].residency);
-                     // $('#schedule_time').val(data.schedule_time);
                      $('input[name^="status"][value="'+data[0].status+'"').prop('checked',true);
                      $('#incident_narrative').val(data[0].incident_narrative);
 
-
-                     // var complainantLen = data[1].length;
-                     // for(var i=0;i<complainantLen; i++){
-                     //    if(data[1][i].involvement_type == "Complainant" ){
-                     //       $('.addComplainantp' + data[1][i].resident_id).prop('checked',true);
-                     //       $('.addComplainant' + data[1][i].resident_id).prop('checked',true);
-                     //    }
-                     // }
-
-                     // var respondentLen = data[1].length;
-                     // for(var i=0;i<respondentLen; i++){
-                     //    if(data[1][i].involvement_type == "Respondent" ){
-                     //       $('.addRespondentp' + data[1][i].resident_id).prop('checked',true);
-                     //       $('.addRespondent' + data[1][i].resident_id).prop('checked',true);
-                     //    }
-
-                     // }
-
-                     // var victimLen = data[1].length;
-                     // for(var i=0;i<victimLen; i++){
-                     //    if(data[1][i].involvement_type == "Victim" ){
-                     //       $('.addVictimp' + data[1][i].resident_id).prop('checked',true);
-                     //       $('.addVictim' + data[1][i].resident_id).prop('checked',true);
-                     //    }
-
-                     // }
-
-                     // var attackerLen = data[1].length;
-                     // for(var i=0;i<attackerLen; i++){
-                     //    if(data[1][i].involvement_type == "Attacker" ){
-                     //       $('.addAttackerp' + data[1][i].resident_id).prop('checked',true);
-                     //       $('.addAttacker' + data[1][i].resident_id).prop('checked',true);
-                     //    }
-
-                     // }
                   })
                });
 
@@ -764,8 +619,6 @@
 
 
             });
-                  // Blotter and Narrative Report End
-
             });
 
             </script>

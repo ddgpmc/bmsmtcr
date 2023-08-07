@@ -95,6 +95,7 @@ Route::put('/adminpanel/ordinances/{ordinance}', [OrdinancesController::class, '
 
 Route::get('/barangay/ordinances', [OrdinancesController::class, 'residentOrdinances'])->name('barangay.ordinances');
 
+Route::get('/blotter', [BlotterController::class, 'blotter'])->name('blotter');
 
 //News and Updates Module
 Route::resource('news', NewsController::class);

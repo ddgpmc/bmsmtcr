@@ -28,7 +28,7 @@ class blotters extends Model
         // 'schedule_time',
         'schedule',
         'incident_narrative',
-        'residency'
+        // 'residency'
 
     ];
     public $timestamps = true;
